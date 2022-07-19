@@ -1,7 +1,15 @@
 const express = require("express");
+const router = require("./routes");
+const passport = require("./lib/passport");
 const app = express();
-const PORT = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
-app.get("/", (req, res) => res.send("Hello World"));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+app.use(passport.initialize());
+app.use("/api", router);
+
+app.listen(port, () => {
+  console.log(`Listening on http://localhost:${port}/api`);
+});
