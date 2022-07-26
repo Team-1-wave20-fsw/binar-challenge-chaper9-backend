@@ -1173,6 +1173,115 @@
           }
         }
       }
+    },
+    "/gameplay/add": {
+      "post": {
+        "tags": [
+          "Gameplay"
+        ],
+        "summary": "add score",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "add score",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gameid": {
+                  "type": "integer"
+                },
+                "userid": {
+                  "type": "integer"
+                },
+                "score": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "success"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "User successfully updated"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "gameid": {
+                      "type": "integer",
+                      "description": "1"
+                    },
+                    "userid": {
+                      "type": "integer",
+                      "description": "1"
+                    },
+                    "score": {
+                      "type": "integer",
+                      "description": "1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "failed"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "user id not found!"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "failed"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "failed to update!"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Token": []
+          }
+        ]
+      }
     }
   },
   "securityDefinitions": {
