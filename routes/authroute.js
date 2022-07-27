@@ -1,10 +1,6 @@
 const router = require("express").Router();
 const authController = require("../controllers/api/AuthController");
 const restrict = require("../middlewares/restrict");
-router.get("/", authController.index);
-router.post("/register", authController.register);
-router.post("/login", authController.login);
-
 router.all("/register", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
@@ -22,9 +18,14 @@ router.all("/login", (req, res, next) => {
   );
   next();
 });
+router.get("/", authController.index);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+
+
 
 router.get("/login", restrict, (req, res) => {
-  console.log(req);
+  console.log(req.headers);
   res.status(201).json({
     fullname: req.user.dataValues.fullname,
     authorized: true,
