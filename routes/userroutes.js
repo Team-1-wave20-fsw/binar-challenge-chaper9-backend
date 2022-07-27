@@ -6,6 +6,15 @@ const restrict = require("../middlewares/restrict");
  * @Routes "/api/users"
  */
 
+router.all("/:id", (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With,Content-Type,Authorization"
+    );
+    next();
+});
+
 router.get("/score", userController.getUserScores);
 router.get("/", userController.getUsers);
 router.get("/:id", userController.getUserDetail);
